@@ -14,10 +14,10 @@ physics.setGravity( 0, 0 )
 -- physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 10
+local time = 5
 local score = 0
 local died = false
-local qtdEnemy = math.random(1, 7)
+local qtdEnemy = math.random(7)
 local uiEnemy = qtdEnemy
 
 local enemyTable = {}
@@ -55,11 +55,11 @@ local function gameTime()
 	end
 end
 
-timer.performWithDelay( 100, contagem, 0 )
+timer.performWithDelay( 100, count, 0 )
 
 local function createEnemy()
 
-	local newEnemy = display.newImageRect( mainGroup, "./images/alien.png", 100, 120 )
+	local newEnemy = display.newImageRect( mainGroup, "./images/game/ghost.png", 50, 120 )
 	table.insert( enemyTable, newEnemy )
 	physics.addBody( newEnemy, "dynamic", { radius=40 } )
 	newEnemy.myName = "enemy"
@@ -117,14 +117,19 @@ function scene:create( event )
 	sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
 	
 	-- Load the background
-	local background = display.newImageRect( backGroup, "./images/background.png", 800, 1400 )
+	local background = display.newImageRect( backGroup, "./images/game/bar-piso.png", display.contentWidth - 150, display.contentHeight )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
+
+	-- Load my balcony
+	local balcony = display.newImageRect( mainGroup, "./images/game/balcao.png", 800, 150 )
+	balcony.x = display.contentCenterX
+	balcony.y = display.contentCenterY + 400
 
 	-- Load my main character
 	local astronaut = display.newImageRect( mainGroup, "./images/astronaut.png", 100, 100 )
 	astronaut.x = display.contentCenterX
-	astronaut.y = display.contentCenterY + 320
+	astronaut.y = display.contentCenterY + 450
 	
 	-- Display lives and score
 	timeText = display.newText( uiGroup, "Tempo: " .. time, 200, 80, native.systemFont, 24 )
