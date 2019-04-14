@@ -13,7 +13,7 @@ local function gotoGame()
 end
 
 local function gotoHighScores()
-	composer.gotoScene( "highscores", { time=800, effect="crossFade" } )
+	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
 end
 
 
@@ -79,7 +79,7 @@ function scene:create( event )
 	optButton.y = display.contentCenterY + 250
 
 	playButton:addEventListener( "tap", gotoGame )
-	-- highScoresButton:addEventListener( "tap", gotoHighScores )
+	optButton:addEventListener( "tap", gotoHighScores )
 end
 
 

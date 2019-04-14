@@ -11,11 +11,11 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity( 0, 0 )
--- physics.setDrawMode("hybrid")
+physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 5
-local score = 0
+local time = 10
+_G.score = 0
 local died = false
 local qtdEnemy = math.random(7)
 local uiEnemy = qtdEnemy
@@ -31,7 +31,7 @@ local mainGroup
 local uiGroup
 
 local function endGame()
-	composer.gotoScene( "menu", { time=800, effect="crossFade" } )
+	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
 end
 
 local function tapListener(event) 
