@@ -11,13 +11,13 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity( 0, 0 )
-physics.setDrawMode("hybrid")
+-- physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 10
+local time = 5
 _G.score = 0
 local died = false
-local qtdEnemy = math.random(7)
+local qtdEnemy = math.random(3,7)
 local uiEnemy = qtdEnemy
 
 local enemyTable = {}
@@ -36,6 +36,8 @@ end
 
 local function tapListener(event) 
 	print( "FOI" )  -- "event.target" is the tapped object
+	timeText.text = "Tempo: " .. time
+	time = 6
 	score = score + 1
 	scoreText.text = "Score: " .. score
 	uiEnemy = uiEnemy - 1
