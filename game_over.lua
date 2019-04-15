@@ -42,12 +42,12 @@ function scene:create( event )
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
     
-    scoreText = display.newText( sceneGroup, "Sua pontuação foi de:", display.contentCenterX, display.contentCenterY, native.systemFont, 44 )
-    total = display.newText( sceneGroup, score, display.contentCenterX, display.contentCenterY + 60, native.systemFont, 50 )
+    scoreText = display.newText( sceneGroup, "Sua pontuação foi de:", display.contentCenterX, display.contentCenterY - 200, native.systemFont, 44 )
+    total = display.newText( sceneGroup, score, display.contentCenterX, display.contentCenterY + 30, native.systemFont, 80 )
 
-    local overLogo = display.newImageRect( "./images/game_over/game-over.png", 400, 200 )
-    overLogo.x = display.contentCenterX
-    overLogo.y = 200
+    -- local overLogo = display.newImageRect( "./images/game_over/game-over.png", 400, 200 )
+    -- overLogo.x = display.contentCenterX
+    -- overLogo.y = 200
 end
 
 
