@@ -14,7 +14,7 @@ physics.setGravity( 0, 0 )
 -- physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 5
+local time = 200
 _G.score = 0
 local died = false
 local qtdEnemy = math.random(3,7)
@@ -37,7 +37,7 @@ end
 local function tapListener(event) 
 	print( "FOI" )  -- "event.target" is the tapped object
 	timeText.text = "Tempo: " .. time
-	time = 6
+	time = 201
 	score = score + 1
 	scoreText.text = "Score: " .. score
 	uiEnemy = uiEnemy - 1
@@ -122,6 +122,40 @@ function scene:create( event )
 	local background = display.newImageRect( backGroup, "./images/game/bar-piso.png", display.contentWidth - 150, display.contentHeight )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
+
+	-- Load time bar
+
+	-- secondBar = display.newRect(display.contentCenterX - 180 , 34 , 200, 30)
+    -- secondBar:setFillColor( 000/255, 255/255, 0/255 )
+
+	-- local timeBar
+	-- timeBar = display.newRect(display.contentCenterX - 180 , 50 , 200, 30)
+	-- timeBar:setFillColor( 0, 0, 0 )
+	-- timeBar.anchorX = 1
+	-- uiGroup:insert(timeBar)
+
+	-- local sideBar = display.newRect( display.contentCenterX - 200 , 50 , 100, 30 )
+	-- sideBar.strokeWidth = 3
+	-- sideBar:setFillColor( 0, 0, 0 )
+	-- sideBar:setStrokeColor( 0, 0, 0 )
+
+	-- local sideBar2 = display.newRect( display.contentCenterX - 150 , 50 , 100, 30 )
+	-- sideBar2.strokeWidth = 0
+	-- sideBar2:setFillColor( 1, 1, 0)
+	-- sideBar2:setStrokeColor( 0, 0, 0 )
+	-- sideBar2.anchorX = 1
+
+	local oloko = display.newRoundedRect( mainGroup, 200 , 40, 125, 20, 12 )
+	oloko.strokeWidth = 3
+	oloko:setFillColor( 0, 0, 0 )
+	oloko:setStrokeColor( 0, 0, 0 )
+
+	local oloko2 = display.newRoundedRect( mainGroup, 135 , 40, 126, 20, 12 )
+	oloko2.strokeWidth = 3
+	oloko2:setFillColor( 1, 1, 0 )
+	oloko2:setStrokeColor( 0, 0, 0 )
+	oloko2.anchorX = -1
+	transition.to(oloko2, {time = 1000,width = 30})
 
 	-- Load my balcony
 	local balcony = display.newImageRect( mainGroup, "./images/game/balcao.png", 800, 150 )
