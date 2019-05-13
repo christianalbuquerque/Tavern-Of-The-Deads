@@ -1,6 +1,7 @@
 
 local composer = require( "composer" )
 local game = require("game")
+local sounds = require("sound_file")
 
 local scene = composer.newScene()
 
@@ -42,12 +43,12 @@ function scene:create( event )
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
     
-    scoreText = display.newText( sceneGroup, "Sua pontuação foi de:", display.contentCenterX, display.contentCenterY - 200, native.systemFont, 44 )
+    scoreText = display.newText( sceneGroup, "Sua pontuação foi de:", display.contentCenterX, display.contentCenterY - 150, native.systemFont, 44 )
     total = display.newText( sceneGroup, score, display.contentCenterX, display.contentCenterY + 30, native.systemFont, 80 )
 
-    -- local overLogo = display.newImageRect( "./images/game_over/game-over.png", 400, 200 )
-    -- overLogo.x = display.contentCenterX
-    -- overLogo.y = 200
+    local overLogo = display.newImageRect( "./images/game_over/game-over.png", 400, 200 )
+    overLogo.x = display.contentCenterX
+	overLogo.y = 200
 end
 
 
@@ -62,6 +63,8 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
+		playGameMusic(gameOverMusic)
+		playSFX(gameOverSound)
 
 	end
 end
@@ -78,7 +81,8 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-
+		audio.stop( 1 )
+		audio.stop( 2 )
 	end
 end
 
@@ -88,7 +92,8 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-
+	audio.dispose( gameOverMusic )
+	audio.dispose( gameOverSound )
 end
 
 

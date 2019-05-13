@@ -14,7 +14,7 @@ physics.setGravity( 0, 0 )
 -- physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 200
+local time = 5
 _G.score = 0
 local died = false
 local qtdEnemy = math.random(3,7)
@@ -25,6 +25,7 @@ local enemyTable = {}
 local gameLoopTimer
 local timeText
 local scoreText
+local sounds = require( "sound_file" )
 
 local backGroup
 local mainGroup
@@ -34,17 +35,43 @@ local function endGame()
 	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
 end
 
+local function nextLevel()
+	composer.gotoScene( "level2", { time=800, effect="crossFade" } )
+end
+
+-- local held = false
+-- local function holdListener()
+-- 	held = true
+-- 	print('Segurando')
+-- end
+
+-- local function touchAim(event)
+-- 	if event.phase == "began" then
+-- 		-- Determine if aim is being held
+--         display.getCurrentStage():setFocus(event.target) -- sets focus to aim
+-- 		holdTimer = timer.performWithDelay(1500, holdListener)
+-- 		print('Dessa vez vai')
+-- 	elseif event.phase == "moved" and held then
+--         -- Drag circle
+-- 		aim.y = event.y
+-- 	elseif event.phase == "ended" or event.phase == "cancelled" then
+--         -- Clean up
+--         display.getCurrentStage():setFocus(nil)
+-- 		held = false
+-- 	end
+-- end
+
 local function tapListener(event) 
 	print( "FOI" )  -- "event.target" is the tapped object
 	timeText.text = "Tempo: " .. time
-	time = 201
+	time = 6
 	score = score + 1
 	scoreText.text = "Score: " .. score
 	uiEnemy = uiEnemy - 1
 	enemyText.text = "Inimigos: ".. uiEnemy
 	event.target:removeSelf()
 	if( uiEnemy == 0 ) then
-		endGame()
+		nextLevel()
 	end
     return true
 end
@@ -123,39 +150,9 @@ function scene:create( event )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
-	-- Load time bar
-
-	-- secondBar = display.newRect(display.contentCenterX - 180 , 34 , 200, 30)
-    -- secondBar:setFillColor( 000/255, 255/255, 0/255 )
-
-	-- local timeBar
-	-- timeBar = display.newRect(display.contentCenterX - 180 , 50 , 200, 30)
-	-- timeBar:setFillColor( 0, 0, 0 )
-	-- timeBar.anchorX = 1
-	-- uiGroup:insert(timeBar)
-
-	-- local sideBar = display.newRect( display.contentCenterX - 200 , 50 , 100, 30 )
-	-- sideBar.strokeWidth = 3
-	-- sideBar:setFillColor( 0, 0, 0 )
-	-- sideBar:setStrokeColor( 0, 0, 0 )
-
-	-- local sideBar2 = display.newRect( display.contentCenterX - 150 , 50 , 100, 30 )
-	-- sideBar2.strokeWidth = 0
-	-- sideBar2:setFillColor( 1, 1, 0)
-	-- sideBar2:setStrokeColor( 0, 0, 0 )
-	-- sideBar2.anchorX = 1
-
-	local oloko = display.newRoundedRect( mainGroup, 200 , 40, 125, 20, 12 )
-	oloko.strokeWidth = 3
-	oloko:setFillColor( 0, 0, 0 )
-	oloko:setStrokeColor( 0, 0, 0 )
-
-	local oloko2 = display.newRoundedRect( mainGroup, 135 , 40, 126, 20, 12 )
-	oloko2.strokeWidth = 3
-	oloko2:setFillColor( 1, 1, 0 )
-	oloko2:setStrokeColor( 0, 0, 0 )
-	oloko2.anchorX = -1
-	transition.to(oloko2, {time = 1000,width = 30})
+	-- local aim = display.newImageRect( "./images/game/mira.png", 50, 50 )
+	-- aim.x = display.contentCenterX
+	-- aim.y = display.contentCenterY
 
 	-- Load my balcony
 	local balcony = display.newImageRect( mainGroup, "./images/game/balcao.png", 800, 150 )
@@ -174,9 +171,8 @@ function scene:create( event )
 
 	gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
 	timer.performWithDelay( 1000, gameTime, 0 )
-	
+	-- aim:addEventListener("touch", touchAim)
 end
-
 
 -- show()
 function scene:show( event )
@@ -190,6 +186,7 @@ function scene:show( event )
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
 		physics.start()
+		playGameMusic(gameMusic)
 	end
 end
 
@@ -207,6 +204,8 @@ function scene:hide( event )
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 		physics.pause()
+		 -- Stop the music!
+		audio.stop( 1 )
 		composer.removeScene( "game" )
 	end
 end
@@ -217,7 +216,7 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-
+	audio.dispose( gameMusic )
 end
 
 

@@ -2,18 +2,21 @@
 local composer = require( "composer" )
 
 local scene = composer.newScene()
+local sounds = require("sound_file")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+local musicTrack
+
 local function gotoGame()
 	composer.gotoScene( "game", { time=800, effect="crossFade" } )
 end
 
 local function gotoHighScores()
-	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
+	composer.gotoScene( "level2", { time=800, effect="crossFade" } )
 end
 
 
@@ -28,7 +31,7 @@ function scene:create( event )
 	-- Code here runs when the scene is first created but has not yet appeared on screen
 
 	-- Loading my menu background image
-	local background = display.newImageRect( sceneGroup, "./images/menu/darkback.png", 800, 1000 )
+	local background = display.newImageRect( sceneGroup, './images/menu/darkback.png', 800, 1000 )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
@@ -80,6 +83,7 @@ function scene:create( event )
 
 	playButton:addEventListener( "tap", gotoGame )
 	optButton:addEventListener( "tap", gotoHighScores )
+	playGameMusic(menuMusic)
 end
 
 
@@ -94,7 +98,6 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-
 	end
 end
 
@@ -110,7 +113,8 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-
+		-- Stop the music!
+		audio.stop( 1 )
 	end
 end
 
@@ -120,6 +124,7 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
+	audio.dispose( menuMusic )
 
 end
 
