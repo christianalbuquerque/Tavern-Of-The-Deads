@@ -14,7 +14,7 @@ physics.setGravity( 0, 0 )
 -- physics.setDrawMode("hybrid")
 
 -- Initialize variables
-local time = 5
+_G.time = 5
 _G.score = 0
 local died = false
 local qtdEnemy = math.random(3,7)

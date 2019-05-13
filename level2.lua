@@ -13,12 +13,12 @@ physics.start()
 physics.setGravity( 0, 0 )
 -- physics.setDrawMode("hybrid")
 
-local time = 5
+local currentTime = time
 local died = false
 local qtdEnemy = math.random(3,7)
 local uiEnemy = qtdEnemy
 local gameLoopTimer
--- local timeText
+local timeText
 local scoreText
 
 local enemyTable = {}
@@ -33,7 +33,7 @@ local function endGame()
 end
 
 -- local function nextLevel()
--- 	composer.gotoScene( "level2", { time=800, effect="crossFade" } )
+-- 	composer.gotoScene( "", { time=800, effect="crossFade" } )
 -- end
 
 local function tapListener(event) 
@@ -45,14 +45,14 @@ local function tapListener(event)
 	enemyText.text = "Inimigos: ".. uiEnemy
 	event.target:removeSelf()
 	if( uiEnemy == 0 ) then
-		nextLevel()
+		endGame()
 	end
     return true
 end
 
 local function gameTime()
     time = time - 1
-	timeText.text = "Tempo: " .. time
+	timeText.text= "Tempo: " .. time
 	if(time == 0) then
 		endGame()
 	end
@@ -123,14 +123,12 @@ function scene:create( event )
 	backgroundLevel2.y = display.contentCenterY
 
 	-- Display lives and score
-	-- timeText = display.newText( uiGroup, "Tempo: " .. currentTime, 200, 80, native.systemFont, 24 )
+	timeText = display.newText( uiGroup, "Tempo: " .. currentTime, 200, 80, native.systemFont, 24 )
 	scoreText = display.newText( uiGroup, "Score: " .. score, 400, 80, native.systemFont, 24 )
 	enemyText = display.newText( uiGroup, "Inimigos: ".. qtdEnemy, 600, 80, native.systemFont, 24 )
 
 	gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
 	timer.performWithDelay( 1000, gameTime, 0 )
-
-
 end
 
 
