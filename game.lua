@@ -11,14 +11,18 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity( 0, 0 )
--- physics.setDrawMode("hybrid")
+physics.setDrawMode("hybrid")
 
 -- Initialize variables
 _G.time = 5
 _G.score = 0
-local died = false
 local qtdEnemy = math.random(3,7)
 local uiEnemy = qtdEnemy
+
+local aimStopped = false
+
+local aim
+local aimTimerLoop
 
 local enemyTable = {}
 
@@ -39,27 +43,35 @@ local function nextLevel()
 	composer.gotoScene( "level2", { time=800, effect="crossFade" } )
 end
 
--- local held = false
--- local function holdListener()
--- 	held = true
--- 	print('Segurando')
--- end
+local function aimCollision(self, event)
+	if(event.other.myName == "enemy") then
+		event.other:removeSelf()
+	end
+end
 
--- local function touchAim(event)
--- 	if event.phase == "began" then
--- 		-- Determine if aim is being held
---         display.getCurrentStage():setFocus(event.target) -- sets focus to aim
--- 		holdTimer = timer.performWithDelay(1500, holdListener)
--- 		print('Dessa vez vai')
--- 	elseif event.phase == "moved" and held then
---         -- Drag circle
--- 		aim.y = event.y
--- 	elseif event.phase == "ended" or event.phase == "cancelled" then
---         -- Clean up
---         display.getCurrentStage():setFocus(nil)
--- 		held = false
--- 	end
--- end
+local function aimLooper()
+	print(aim.y)
+	aim.y = aim.y - 10
+end
+
+local function touchAim(event)
+	if event.phase == "began" then
+		
+		aim = display.newImageRect('./images/game/mira.png', 50, 50)
+		aim.x = display.contentCenterX
+		aim.y = display.contentCenterY
+		aim.myName = "aim"
+
+		aim.collision = aimCollision
+		aim:addEventListener("collision")
+
+		physics.addBody(aim, "dynamic", { radius=20, isSensor=true })
+		aimTimerLoop = timer.performWithDelay(10, aimLooper, -1)
+
+	elseif event.phase == "ended" or event.phase == "cancelled" then
+		timer.cancel(aimTimerLoop)
+	end
+end
 
 local function tapListener(event) 
 	print( "FOI" )  -- "event.target" is the tapped object
@@ -149,10 +161,7 @@ function scene:create( event )
 	local background = display.newImageRect( backGroup, "./images/game/bar-piso.png", display.contentWidth - 150, display.contentHeight )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
-
-	-- local aim = display.newImageRect( "./images/game/mira.png", 50, 50 )
-	-- aim.x = display.contentCenterX
-	-- aim.y = display.contentCenterY
+	background:addEventListener("touch", touchAim)
 
 	-- Load my balcony
 	local balcony = display.newImageRect( mainGroup, "./images/game/balcao.png", 800, 150 )
@@ -171,7 +180,6 @@ function scene:create( event )
 
 	gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
 	timer.performWithDelay( 1000, gameTime, 0 )
-	-- aim:addEventListener("touch", touchAim)
 end
 
 -- show()
@@ -213,12 +221,10 @@ end
 
 -- destroy()
 function scene:destroy( event )
-
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
 	audio.dispose( gameMusic )
 end
-
 
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners
@@ -227,6 +233,6 @@ scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
--- -----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 
 return scene
