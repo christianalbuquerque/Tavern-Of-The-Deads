@@ -14,126 +14,22 @@ physics.setGravity( 0, 0 )
 physics.setDrawMode("hybrid")
 
 -- Initialize variables
-_G.time = 5
+_G.time = 1000
 _G.score = 0
 local qtdEnemy = math.random(3,7)
 local uiEnemy = qtdEnemy
-
+local screenEnemy = qtdEnemy
 local aimStopped = false
-
 local aim
 local aimTimerLoop
-
 local enemyTable = {}
-
 local gameLoopTimer
 local timeText
 local scoreText
 local sounds = require( "sound_file" )
-
 local backGroup
 local mainGroup
 local uiGroup
-
-local function endGame()
-	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
-end
-
-local function nextLevel()
-	composer.gotoScene( "level2", { time=800, effect="crossFade" } )
-end
-
-local function aimCollision(self, event)
-	if(event.other.myName == "enemy") then
-		event.other:removeSelf()
-	end
-end
-
-local function aimLooper()
-	print(aim.y)
-	aim.y = aim.y - 10
-end
-
-local function touchAim(event)
-	if event.phase == "began" then
-		
-		aim = display.newImageRect('./images/game/mira.png', 50, 50)
-		aim.x = display.contentCenterX
-		aim.y = display.contentCenterY
-		aim.myName = "aim"
-
-		aim.collision = aimCollision
-		aim:addEventListener("collision")
-
-		physics.addBody(aim, "dynamic", { radius=20, isSensor=true })
-		aimTimerLoop = timer.performWithDelay(10, aimLooper, -1)
-
-	elseif event.phase == "ended" or event.phase == "cancelled" then
-		timer.cancel(aimTimerLoop)
-	end
-end
-
-local function tapListener(event) 
-	print( "FOI" )  -- "event.target" is the tapped object
-	timeText.text = "Tempo: " .. time
-	time = 6
-	score = score + 1
-	scoreText.text = "Score: " .. score
-	uiEnemy = uiEnemy - 1
-	enemyText.text = "Inimigos: ".. uiEnemy
-	event.target:removeSelf()
-	if( uiEnemy == 0 ) then
-		nextLevel()
-	end
-    return true
-end
-
-local function gameTime()
-    time = time - 1
-	timeText.text = "Tempo: " .. time
-	if(time == 0) then
-		endGame()
-	end
-end
-
-timer.performWithDelay( 100, count, 0 )
-
-local function createEnemy()
-
-	local newEnemy = display.newImageRect( mainGroup, "./images/game/ghost.png", 50, 120 )
-	table.insert( enemyTable, newEnemy )
-	physics.addBody( newEnemy, "dynamic", { radius=40 } )
-	newEnemy.myName = "enemy"
-	newEnemy:addEventListener( "tap", tapListener)
-
-	local whereFrom = math.random( 2 )
-
-	if( whereFrom == 1 ) then
-		--From Left
-		newEnemy.x = math.random(120, display.contentCenterX)
-		newEnemy.y = math.random(150, display.contentCenterY)
-		-- transition.to( newEnemy, { time=1500, alpha=0, x=(-60), y=(-150) } )
-    elseif ( whereFrom == 2 ) then
-        -- From the right
-        newEnemy.x = math.random(display.contentCenterX, display.contentWidth - 120)
-		newEnemy.y = math.random(150, display.contentCenterY)
-		-- transition.to( newEnemy, { time=1500, alpha=0, x=(display.contentWidth + 60), y=(-150) } )
-	end
-end
-
-
-local function gameLoop()
-	while( qtdEnemy ~= 0 ) do
-		createEnemy()
-		qtdEnemy = qtdEnemy - 1
-	end
-end
-
-local function updateText()
-	timeText.text = "Tempo: " .. time
-	scoreText.text = "Score: " .. score
-	enemyText.text = "Inimigos: ".. qtdEnemy
-end
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -156,6 +52,156 @@ function scene:create( event )
 
 	uiGroup = display.newGroup()    -- Display group for UI objects like the score
 	sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
+
+-- Função que leva ao meu Game Over
+
+	local function endGame()
+		composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
+	end
+	
+
+-- Me redireciona para a próxima fase (temporario)
+	local function nextLevel()
+		composer.gotoScene( "level2", { time=800, effect="crossFade" } )
+	end
+
+	local function verifyEnemies()
+		print('--------------- VERIFY ENEMIES')
+		for x = 1, uiEnemy, 1 do
+			print('--- COLLIDING')
+			print(enemyTable[x].colliding)
+			print(enemyTable[x].x)
+			if enemyTable[x] ~= nil and enemyTable[x].colliding == true then				
+				enemyTable[x].colliding = false 
+				enemyTable[x]:removeSelf()
+				enemyTable[x] = enemyTable[uiEnemy]
+				uiEnemy = uiEnemy - 1
+			end			
+		end
+	end
+
+	local function updateValues(event)
+
+		timeText.text = "Tempo: " .. time
+		time = 6
+		score = score + 1
+		scoreText.text = "Score: " .. score
+		screenEnemy = screenEnemy - 1
+		enemyText.text = "Inimigos: ".. screenEnemy
+
+		if( uiEnemy == 0 ) then
+			nextLevel()
+		end
+
+		return true
+	end
+	
+-- Lida com toda parte da colisão que se relaciona com a mira do meu jogo
+
+	local function aimCollision(event)	
+		if(event.object2.myName == "enemy" and event.object1.myName == "aim") or 
+		(event.object1.myName == "enemy" and event.object2.myName == "aim") then	
+			print('--------------- COLIDIU FANTASMA')
+			if event.phase == "began" then
+				if event.object1.myName == "enemy" then
+					event.object1.colliding = true
+				else
+					event.object2.colliding = true
+				end
+			end
+			
+			if event.phase == "ended" then
+				if event.object1.myName == "enemy" then
+					event.object2.colliding = false
+				else
+					event.object1.colliding = false
+				end
+			end
+			print(event.object1.colliding)
+			print(event.object2.colliding)
+			updateValues()
+		end
+	end
+
+-- Loop que diminui o eixo Y referente a minha mira, fazendo ela subir
+	
+	local function aimLooper()
+		aim.y = aim.y - 10
+	end
+	
+-- Faço um verificação do estado do meu evento, se for inicial crio a minha mira. Atribuo a sua colisão
+-- fisica e afins.
+
+	local function touchAim(event)
+		if event.phase == "began" then
+	
+			aim = display.newImageRect('./images/game/mira.png', 50, 50)
+			aim.x = event.x
+			aim.y = event.y			
+			aim.myName = "aim"
+
+			physics.addBody(aim, "dynamic", { radius=20, isSensor=true })
+			aimTimerLoop = timer.performWithDelay(10, aimLooper, -1)
+	
+		elseif event.phase == "ended" or event.phase == "cancelled" then			
+			timer.cancel(aimTimerLoop) -- Cancela o timer da mira
+			verifyEnemies()
+		end
+	end
+	
+-- Aqui tenho todo o controle do tempo do jogo
+
+	local function gameTime()
+		time = time - 1
+		timeText.text = "Tempo: " .. time
+		if(time == 0) then
+			endGame()
+		end
+	end
+	
+	timer.performWithDelay( 100, count, 0 )
+
+-- Crio os meus inimigos e defino as posições iniciais deles
+	
+	local function createEnemy()
+	
+		local newEnemy = display.newImageRect( mainGroup, "./images/game/ghost.png", 50, 120 )
+		table.insert( enemyTable, newEnemy )
+		physics.addBody( newEnemy, "dynamic", { radius=40 } )
+		newEnemy.myName = "enemy"
+		newEnemy.colliding = false
+	
+		local whereFrom = math.random( 2 )
+	
+		if( whereFrom == 1 ) then -- Dependendo do valor que sair desse Math.Random defino de qual posição ele irá ser gerado
+
+			--From Left
+			newEnemy.x = math.random(120, display.contentCenterX)
+			newEnemy.y = math.random(150, display.contentCenterY)
+		elseif ( whereFrom == 2 ) then
+
+			-- From the right
+			newEnemy.x = math.random(display.contentCenterX, display.contentWidth - 120)
+			newEnemy.y = math.random(150, display.contentCenterY)
+		end
+	end
+
+-- Loop de controle da criação dos meus inimigos que serão gerados na tela
+	
+	local function gameLoop()
+		while( qtdEnemy ~= 0 ) do
+			createEnemy()
+			qtdEnemy = qtdEnemy - 1
+		end
+	end
+
+-- Função de controle do elementos visuais que serão modificados de acordo com o tempo
+	
+	local function updateText()
+		timeText.text = "Tempo: " .. time
+		scoreText.text = "Score: " .. score
+		enemyText.text = "Inimigos: ".. qtdEnemy
+	end
 	
 	-- Load the background
 	local background = display.newImageRect( backGroup, "./images/game/bar-piso.png", display.contentWidth - 150, display.contentHeight )
@@ -180,6 +226,8 @@ function scene:create( event )
 
 	gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
 	timer.performWithDelay( 1000, gameTime, 0 )
+
+	Runtime:addEventListener("collision", aimCollision)
 end
 
 -- show()
@@ -217,7 +265,6 @@ function scene:hide( event )
 		composer.removeScene( "game" )
 	end
 end
-
 
 -- destroy()
 function scene:destroy( event )
