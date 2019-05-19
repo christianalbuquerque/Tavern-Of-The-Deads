@@ -23,7 +23,7 @@ local uiGroup = display.newGroup()
 local function gameTime()
 	lvl:reduceTime(1)
 	if(lvl:getTime() == 0) then
-		endGame()
+		lvl:endGame()
 	end
 end 
 

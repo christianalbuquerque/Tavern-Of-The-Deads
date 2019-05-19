@@ -19,6 +19,8 @@ local score = 0
 local enemyText
 local qtdEnemy = 0
 
+local enemyChosen
+
 local bartender
 local aim
 local enemies = {}
@@ -36,6 +38,14 @@ end
 
 function lvl:updateScore()
     scoreText.text = "Score: " .. score
+end
+
+function lvl:getScore()
+    return score
+end
+
+function lvl:restoreTime()
+    time = time + 5
 end
 
 function lvl:reduceTime(value) 
@@ -125,6 +135,10 @@ end
 
 ------------ ENEMIES
 
+function selectEnemy()
+    enemyChosen = math.random( 1, base.levels[currentLevel].numEnemies )
+end
+
 function lvl:createEnemy()
 	local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, 50, 120 )
 	newEnemy.myName = "enemy"
@@ -153,7 +167,8 @@ function verifyEnemies()
 		if enemies[x] ~= nil and enemies[x].colliding == true then				
 			enemies[x].colliding = false 
 			enemies[x]:removeSelf()
-			enemies[x] = enemies[qtdEnemy]
+            enemies[x] = enemies[qtdEnemy]
+            lvl:startTime()
             lvl:reduceEnemyQtd()
             lvl:addScore(1)
 		end			
@@ -180,7 +195,7 @@ function aimCollision(event)
 	(event.object1.myName == "enemy" and event.object2.myName == "aim") then	
 		if event.phase == "began" then
 			if event.object1.myName == "enemy" then
-				event.object1.colliding = true
+                event.object1.colliding = true
 			else
 				event.object2.colliding = true				
 			end
@@ -197,7 +212,7 @@ function aimCollision(event)
 end
 
 function aimMovement()
-	aim.y = aim.y - 10
+	aim.y = aim.y - 5
 end
 
 function touchAim(event)

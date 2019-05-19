@@ -1,24 +1,18 @@
 
 local composer = require( "composer" )
-local game = require("game")
+local base = require( "base" )
+local lvl = require( "level_template" )
 local sounds = require("sound_file")
 
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
-
-
-local score = _G.score
-local scoreText
-local total
-
-
--- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
+
+local function gotoMenu()
+	composer.gotoScene( "menu", { time=800, effect="crossFade" } )
+end
 
 -- create()
 function scene:create( event )
@@ -39,16 +33,26 @@ function scene:create( event )
 	sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
     
     -- Loading my menu background image
-	local background = display.newImageRect( sceneGroup, "./images/menu/darkback.png", 800, 1000 )
+	local background = display.newImageRect( sceneGroup, "./images/game_over/gameover.png", 800, 1000 )
 	background.x = display.contentCenterX
-    background.y = display.contentCenterY
-    
-    scoreText = display.newText( sceneGroup, "Sua pontuação foi de:", display.contentCenterX, display.contentCenterY - 150, native.systemFont, 44 )
-    total = display.newText( sceneGroup, score, display.contentCenterX, display.contentCenterY + 30, native.systemFont, 80 )
+	background.y = display.contentCenterY
+	
+	local rightShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	rightShortChain.x = display.contentCenterX + 100
+	rightShortChain.y = 80
 
-    local overLogo = display.newImageRect( "./images/game_over/game-over.png", 400, 200 )
-    overLogo.x = display.contentCenterX
-	overLogo.y = 200
+	-- Loading my first short chain (left) in the top
+	local leftShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	leftShortChain.x = display.contentCenterX - 100
+	leftShortChain.y = 80
+
+    local backBtn = display.newImageRect( sceneGroup, "./images/game_over/back.png", 300, 100 )
+    backBtn.x = display.contentCenterX
+	backBtn.y = 200
+
+	local scoreText = display.newText( sceneGroup, lvl:getScore(), display.contentCenterX  - 15, display.contentCenterY + 400, native.systemFont, 80 )
+
+	backBtn:addEventListener( "tap", gotoMenu )
 end
 
 
