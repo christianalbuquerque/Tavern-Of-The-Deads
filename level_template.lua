@@ -9,7 +9,7 @@ physics.setDrawMode("hybrid")
 local lvl = {}
 
 local uiGroup = display.newGroup()
-local enemiesGroup = display.newGroup()
+local enemiesGroup
 local background
 
 local timeText
@@ -140,7 +140,12 @@ function selectEnemy()
 end
 
 function lvl:createEnemy()
-	local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, 50, 120 )
+    print("------Enemies Group--------")
+    print(enemiesGroup)
+    print("------Caminho dos Inimigos--------")
+    print(base.levels[currentLevel].enemies[1].path)
+    local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, 50, 120 )
+    print("eiohGOE")
 	newEnemy.myName = "enemy"
     newEnemy.colliding = false
     physics.addBody(newEnemy, "dynamic", { radius=40 } )
@@ -176,6 +181,7 @@ function verifyEnemies()
 end
 
 function lvl:createAllEnemies()
+    enemiesGroup = display.newGroup() 
     for x=1, base.levels[currentLevel].numEnemies, 1 do
         lvl:createEnemy()
     end
@@ -251,8 +257,9 @@ end
 function lvl:destroy()
     enemies = {}
     qtdEnemy = 0
-    score = 0
-    time = 0    
+    time = 0
+    enemiesGroup:removeSelf()
+    enemiesGroup = nil
 end
 
 return lvl

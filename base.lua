@@ -14,8 +14,8 @@ base.levels = {}
     base.levels[1] = {}
         base.levels[1].background = "images/game/bar-piso.png"
         base.levels[1].numEnemies = 5
-        base.levels[1].time = 6
-        base.levels[1].lvlName = "game"
+        base.levels[1].time = 1
+        base.levels[1].lvlName = "level1"
         base.levels[1].enemies = {}
 
             base.levels[1].enemies[1] = {}

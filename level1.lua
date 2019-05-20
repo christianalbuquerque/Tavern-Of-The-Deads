@@ -1,7 +1,7 @@
 local composer = require( "composer" )
 local lvl = require("level_template")
 
-composer.recycleOnSceneChange = true
+composer.recycleOnSceneChange = false
 local scene = composer.newScene()
 
 local sounds = require( "sound_file" )
@@ -86,13 +86,16 @@ function scene:hide( event )
 	elseif ( phase == "did" ) then
 		-- physics.pause()
 		audio.stop( 1 )
-		composer.removeScene( "game" )
+		composer.removeScene( "level1" )
 	end
 end
 
 -- destroy()
 function scene:destroy( event )
 	local sceneGroup = self.view
+	print('DESTROOY')
+	lvl:destroy()
+	sceneGroup:removeSelf()
 	audio.dispose( gameMusic )
 end
 
