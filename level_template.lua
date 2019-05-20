@@ -244,6 +244,10 @@ function lvl:startAimCollision()
     Runtime:addEventListener("collision", aimCollision)
 end
 
+function lvl:endAimCollision()
+    Runtime:removeEventListener("collision", aimCollision)
+end
+
 ------------ CONTROLLING LEVELS
 
 function lvl:nextLevel()
@@ -255,11 +259,9 @@ function lvl:endGame()
 end
 
 function lvl:destroy()
-    enemies = {}
+    lvl:endAimCollision()
     qtdEnemy = 0
-    time = 0
-    enemiesGroup:removeSelf()
-    enemiesGroup = nil
+    time = 0    
 end
 
 return lvl

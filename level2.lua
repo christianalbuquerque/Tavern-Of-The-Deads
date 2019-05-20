@@ -2,6 +2,7 @@
 local composer = require( "composer" )
 local lvl = require( "level_template" )
 
+composer.recycleOnSceneChange = false
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -12,7 +13,6 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity( 0, 0 )
--- physics.setDrawMode("hybrid")
 
 local currentTime = time
 local died = false
@@ -53,7 +53,6 @@ function scene:create( event )
 	lvl:startTime()
 
 ----------------------------- Carregar Sprites
-	
 	mainGroup:insert(lvl:createBartender())
 	backGroup:insert(lvl:createBackground())
 
@@ -66,7 +65,6 @@ function scene:create( event )
 	
 	lvl:startAimCollision()
 	lvl:startEnemyQtd()
-
 end
 
 
@@ -81,8 +79,7 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-		physics.start()
-		playGameMusic(gameMusic)
+		-- playGameMusic(gameMusic)
 	end
 end
 
@@ -100,7 +97,7 @@ function scene:hide( event )
 		-- Code here runs immediately after the scene goes entirely off screen
 		physics.pause()
 		audio.stop( 1 )
-		composer.removeScene( "level2" )
+		--composer.removeScene( "level2" )
 	end
 end
 
@@ -110,7 +107,6 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-	local sceneGroup = self.view
 	audio.dispose( gameMusic )
 end
 

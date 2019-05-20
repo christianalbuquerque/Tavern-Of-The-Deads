@@ -83,7 +83,7 @@ function scene:create( event )
 
 	playButton:addEventListener( "tap", gotoGame )
 	optButton:addEventListener( "tap", gotoHighScores )
-	playGameMusic(menuMusic)
+	--playGameMusic(menuMusic)
 end
 
 
