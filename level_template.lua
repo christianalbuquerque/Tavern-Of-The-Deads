@@ -259,6 +259,7 @@ function lvl:endGame()
 end
 
 function lvl:destroy()
+    enemies = {}
     lvl:endAimCollision()
     qtdEnemy = 0
     time = 0    
