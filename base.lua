@@ -30,7 +30,7 @@ base.levels = {}
     base.levels[2] = {}
         base.levels[2].background = "images/game/level2/day-level.png"
         base.levels[2].numEnemies = 7
-        base.levels[2].time = 10
+        base.levels[2].time = 4
         base.levels[2].lvlName = "level2"
         base.levels[2].enemies = {}
 
@@ -44,5 +44,23 @@ base.levels = {}
             base.levels[2].enemies[2].path = "images/game/level2/zombie.png"
             base.levels[2].enemies[2].x = 50
             base.levels[2].enemies[2].y = 120
+
+
+    --------------------------------------
+    --- LEVEL 3 ---
+    --------------------------------------
+
+    base.levels[3] = {}
+        base.levels[3].background = "images/game/level3/night-level.png"
+        base.levels[3].numEnemies = 10
+        base.levels[3].time = 4
+        base.levels[3].lvlName = "level3"
+        base.levels[3].enemies = {}
+
+            base.levels[3].enemies[1] = {}
+            base.levels[3].enemies[1].path = "images/game/level3/monster.png"
+            base.levels[3].enemies[1].x = 50
+            base.levels[3].enemies[1].y = 120
+
 return base
 

@@ -19,7 +19,6 @@ local died = false
 local qtdEnemy = math.random(3,7)
 local uiEnemy = qtdEnemy
 local gameLoopTimer
-local gameLoop
 local timeText
 local scoreText
 
@@ -45,7 +44,7 @@ end
 function scene:create( event )
 
 	local sceneGroup = self.view
-	lvl:setCurrentLevel(2)
+	lvl:setCurrentLevel(3)
 
 	sceneGroup:insert(backGroup)
 	sceneGroup:insert(mainGroup)
@@ -60,8 +59,6 @@ function scene:create( event )
 	local header = lvl:buildHeader()
 	uiGroup:insert(header)
 	timer.performWithDelay( 1000, gameTime, 0 )
-
-	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
 
 	local enemies = lvl:createAllEnemies()
 	mainGroup:insert(lvl:getEnemiesGroup())
@@ -95,13 +92,6 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-
-		lvl:endAimCollision()
-		backGroup:removeSelf()
-		mainGroup:removeSelf()
-		uiGroup:removeSelf()
-		timer.cancel(gameLoop)
-		lvl:destroy()
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
