@@ -20,6 +20,7 @@ base.levels = {}
 
             base.levels[1].enemies[1] = {}
             base.levels[1].enemies[1].path = "images/game/ghost.png"
+            base.levels[1].enemies[1].type = "ghost"
             base.levels[1].enemies[1].x = 50
             base.levels[1].enemies[1].y = 120
 
