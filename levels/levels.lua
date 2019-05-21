@@ -19,11 +19,11 @@ local function handleLevelSelect( event )
 	
 		base.settings.currentLevel = event.target.id
 		if(event.target.id == '1') then
-            composer.gotoScene( "level1", { effect="crossFade", time=333 } )
+            composer.gotoScene( "levels.level1", { effect="crossFade", time=333 } )
         elseif ( event.target.id == '2') then
-            composer.gotoScene( "level2", { effect="crossFade", time=333 } )            
+            composer.gotoScene( "levels.level2", { effect="crossFade", time=333 } )            
 		else
-			composer.gotoScene( "level3", { effect="crossFade", time=333 } )
+			composer.gotoScene( "levels.level3", { effect="crossFade", time=333 } )
 		end		
 	end
 end

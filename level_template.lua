@@ -251,11 +251,11 @@ end
 ------------ CONTROLLING LEVELS
 
 function lvl:nextLevel()
-	composer.gotoScene( base.levels[currentLevel+1].lvlName, { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels."..base.levels[currentLevel+1].lvlName, { time=800, effect="crossFade" } )
 end
 
 function lvl:endGame()
-	composer.gotoScene( "game_over", { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels.game_over", { time=800, effect="crossFade" } )
 end
 
 function lvl:destroy()

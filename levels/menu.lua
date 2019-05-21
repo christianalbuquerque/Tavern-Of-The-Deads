@@ -12,11 +12,11 @@ local sounds = require("sound_file")
 local musicTrack
 
 local function gotoGame()
-	composer.gotoScene( "level1", { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels.level1", { time=800, effect="crossFade" } )
 end
 
 local function gotoHighScores()
-	composer.gotoScene( "levels", { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels.levels", { time=800, effect="crossFade" } )
 end
 
 
