@@ -126,7 +126,7 @@ end
 
 function lvl:createBartender()
     local bartenderGroup = display.newGroup()
-    bartender = display.newImageRect(bartenderGroup, "./images/astronaut.png", 100, 100 )
+    bartender = display.newImageRect(bartenderGroup, "./images/base/astronaut.png", 100, 100 )
     bartender.x = display.contentCenterX
     bartender.y = display.contentCenterY + 450
     bartenderGroup:insert(bartender)
@@ -140,12 +140,7 @@ function selectEnemy()
 end
 
 function lvl:createEnemy()
-    print("------Enemies Group--------")
-    print(enemiesGroup)
-    print("------Caminho dos Inimigos--------")
-    print(base.levels[currentLevel].enemies[1].path)
     local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, 50, 120 )
-    print("eiohGOE")
 	newEnemy.myName = "enemy"
     newEnemy.colliding = false
     physics.addBody(newEnemy, "dynamic", { radius=40 } )
@@ -223,7 +218,7 @@ end
 
 function touchAim(event)
 	if event.phase == "began" then
-		aim = display.newImageRect('./images/game/mira.png', 50, 50)
+		aim = display.newImageRect('./images/base/mira.png', 50, 50)
 		aim.x = event.x
 		aim.y = 800		
 		aim.myName = "aim"

@@ -35,7 +35,7 @@ function scene:create( event )
 	sceneGroup:insert(mainGroup)
 	sceneGroup:insert(uiGroup)
 
-	local background = display.newImageRect( backGroup, "images/game/box.png", display.contentWidth - 150, display.contentHeight )
+	local background = display.newImageRect( backGroup, "images/selector-imgs/box.png", display.contentWidth - 150, display.contentHeight )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 	backGroup:insert( background )
@@ -58,7 +58,7 @@ function scene:create( event )
 			id = tostring(i),
 			width = 50,
 			height = 33,
-			defaultFile = "images/game/resumebtn.png",
+			defaultFile = "images/selector-imgs/resumebtn.png",
 			onEvent = handleLevelSelect,
         }) 
         buttons[i].x = xOffset
