@@ -4,7 +4,7 @@ local base = require( "base")
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 0)
--- physics.setDrawMode("hybrid")
+physics.setDrawMode("hybrid")
 
 local lvl = {}
 
@@ -225,7 +225,7 @@ function touchAim(event)
 	if event.phase == "began" then
 		aim = display.newImageRect('./images/game/mira.png', 50, 50)
 		aim.x = event.x
-		aim.y = event.y			
+		aim.y = 800		
 		aim.myName = "aim"
 
 		physics.addBody(aim, "dynamic", { radius=20, isSensor=true })
@@ -259,6 +259,7 @@ function lvl:endGame()
 end
 
 function lvl:destroy()
+    print('<><><>To no Template<><><>')
     enemies = {}
     lvl:endAimCollision()
     qtdEnemy = 0

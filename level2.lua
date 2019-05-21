@@ -1,29 +1,13 @@
-
 local composer = require( "composer" )
 local lvl = require( "level_template" )
 
 composer.recycleOnSceneChange = false
 local scene = composer.newScene()
 
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
+local sounds = require( "sound_file" )
+local base = require( "base" )
 
-local physics = require( "physics" )
-physics.start()
-physics.setGravity( 0, 0 )
-
-local currentTime = time
-local died = false
-local qtdEnemy = math.random(3,7)
-local uiEnemy = qtdEnemy
-local gameLoopTimer
 local gameLoop
-local timeText
-local scoreText
-
-local enemyTable = {}
 
 local backGroup = display.newGroup()
 local mainGroup = display.newGroup()
@@ -94,18 +78,14 @@ function scene:hide( event )
 	local phase = event.phase
 
 	if ( phase == "will" ) then
-		-- Code here runs when the scene is on screen (but is about to go off screen)
-
 		lvl:endAimCollision()
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
+		-- timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()
-
 	elseif ( phase == "did" ) then
-		-- Code here runs immediately after the scene goes entirely off screen
-		physics.pause()
 		audio.stop( 1 )
 	end
 end
@@ -113,7 +93,7 @@ end
 
 -- destroy()
 function scene:destroy( event )
-
+	print('DESTROY2')
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
 	audio.dispose( gameMusic )

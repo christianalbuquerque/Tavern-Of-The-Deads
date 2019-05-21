@@ -16,7 +16,7 @@ local function gotoGame()
 end
 
 local function gotoHighScores()
-	composer.gotoScene( "level3", { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels", { time=800, effect="crossFade" } )
 end
 
 
