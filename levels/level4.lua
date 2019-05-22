@@ -25,21 +25,13 @@ local function gameTime()
 	if(lvl:getTime() == 0) then
 		lvl:endGame()
 	end
-end 
-
--- local function enemyInteraction()
--- 	local enemy
--- 	enemy = math.random(1, lvl:getEnemyQtd())
--- 	enemies = lvl:getEnemiesGroup()
--- 	enemies[enemy].x = math.random(120, display.contentCenterX)
--- 	enemies[enemy].y = math.random(150, display.contentCenterY)
--- end
+end
 
 -- create()
 function scene:create( event )
 
 	local sceneGroup = self.view
-	lvl:setCurrentLevel(1)
+	lvl:setCurrentLevel(4)
 
 	sceneGroup:insert(backGroup)
 	sceneGroup:insert(mainGroup)
@@ -51,17 +43,10 @@ function scene:create( event )
 	
 	mainGroup:insert(lvl:createBartender())
 	backGroup:insert(lvl:createBackground())
-
-	-- BALCONY
-	local balcony = display.newImageRect( mainGroup, "./images/bar-level/balcao.png", 800, 150 )
-	balcony.x = display.contentCenterX
-	balcony.y = display.contentCenterY + 400
-	backGroup:insert(balcony)
 			
 	local header = lvl:buildHeader()
 	uiGroup:insert(header)
 	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
-	-- enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
 
 	local enemies = lvl:createAllEnemies()
 	mainGroup:insert(lvl:getEnemiesGroup())
@@ -95,7 +80,6 @@ function scene:hide( event )
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
-		-- timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()
 	elseif ( phase == "did" ) then

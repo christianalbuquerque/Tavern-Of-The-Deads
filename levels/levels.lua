@@ -21,9 +21,11 @@ local function handleLevelSelect( event )
 		if(event.target.id == '1') then
             composer.gotoScene( "levels.level1", { effect="crossFade", time=333 } )
         elseif ( event.target.id == '2') then
-            composer.gotoScene( "levels.level2", { effect="crossFade", time=333 } )            
+			composer.gotoScene( "levels.level2", { effect="crossFade", time=333 } ) 
+		elseif ( event.target.id == '3') then
+            composer.gotoScene( "levels.level3", { effect="crossFade", time=333 } )            
 		else
-			composer.gotoScene( "levels.level3", { effect="crossFade", time=333 } )
+			composer.gotoScene( "levels.level4", { effect="crossFade", time=333 } )
 		end		
 	end
 end
@@ -45,6 +47,18 @@ function scene:create( event )
 	local xOffset = display.contentCenterX
 	local yOffset = 200
 
+	local scrollView = widget.newScrollView{
+		left = 0,
+		top = 0,
+		topPadding = 50,
+		bottomPadding = 50,
+		width = display.contentWidth - 150,
+		height = display.contentHeight,
+		hideBackground = true,
+		horizontalScrollDisabled = true ,
+		verticalScrollDisabled = false ,
+}
+
 	local buttons = {}
 
 	for i = 1, base.settings.maxLevels do
@@ -52,7 +66,8 @@ function scene:create( event )
 		background = display.newImageRect(uiGroup, base.settings.levels[i].background, 200, 200)
 		background.x = xOffset
         background.y = yOffset
-        uiGroup:insert( background )
+		backGroup:insert( background )
+		scrollView:insert(background)
 
         buttons[i] = widget.newButton({
 			id = tostring(i),
@@ -62,19 +77,22 @@ function scene:create( event )
 			onEvent = handleLevelSelect,
         }) 
         buttons[i].x = xOffset
-        buttons[i].y = yOffset
-        uiGroup:insert( buttons[i] )
+		buttons[i].y = yOffset
+		uiGroup:insert( buttons[i] )
+		scrollView:insert( uiGroup )
 
         titleText = display.newText(uiGroup ,base.settings.levels[i].title, 0, 0, native.systemFont, 30)
 		titleText:setFillColor(0.2)
 		titleText.x = xOffset
-        titleText.y = yOffset + 130
+		titleText.y = yOffset + 130
+		-- scrollView:insert(titleText)
 
         yOffset = yOffset + 300
 
     end
 
 	sceneGroup:insert(levelSelectGroup)
+	sceneGroup:insert(scrollView)
 	levelSelectGroup.x = display.contentCenterX
 	levelSelectGroup.y = display.contentCenterY
 end
