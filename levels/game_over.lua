@@ -11,7 +11,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 local function gotoMenu()
-	composer.gotoScene( "menu", { time=800, effect="crossFade" } )
+	composer.gotoScene( "levels.menu", { time=800, effect="crossFade" } )
 end
 
 -- create()

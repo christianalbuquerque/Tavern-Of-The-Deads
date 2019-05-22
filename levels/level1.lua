@@ -80,7 +80,7 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- physics.start()
-		-- playGameMusic(gameMusic)
+		playGameMusic(gameMusic)
 	end
 end
 
