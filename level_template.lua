@@ -4,7 +4,7 @@ local base = require( "base")
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 0)
-physics.setDrawMode("hybrid")
+-- physics.setDrawMode("hybrid")
 
 local lvl = {}
 
@@ -140,7 +140,7 @@ function selectEnemy()
 end
 
 function lvl:createEnemy()
-    local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, 50, 120 )
+    local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, base.levels[currentLevel].enemies[1].width, base.levels[currentLevel].enemies[1].height)
 	newEnemy.myName = "enemy"
     newEnemy.colliding = false
     physics.addBody(newEnemy, "dynamic", { radius=40 } )
@@ -254,7 +254,6 @@ function lvl:endGame()
 end
 
 function lvl:destroy()
-    print('<><><>To no Template<><><>')
     enemies = {}
     lvl:endAimCollision()
     qtdEnemy = 0

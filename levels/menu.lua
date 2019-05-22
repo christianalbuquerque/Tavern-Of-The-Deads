@@ -1,6 +1,5 @@
 
 local composer = require( "composer" )
-
 local scene = composer.newScene()
 local sounds = require("sound_file")
 
@@ -83,7 +82,7 @@ function scene:create( event )
 
 	playButton:addEventListener( "tap", gotoGame )
 	optButton:addEventListener( "tap", gotoHighScores )
-	--playGameMusic(menuMusic)
+	playGameMusic(menuMusic)
 end
 
 

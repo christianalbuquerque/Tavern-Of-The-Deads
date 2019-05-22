@@ -1,16 +1,10 @@
 --MUSIC 
 menuMusic = audio.loadStream( "audio/menu/Bone-Yard-Waltz-Menu.mp3")
-gameMusic = audio.loadStream( "audio/menu/The-Crypt.wav")
-gameOverMusic = audio.loadStream( "audio/game_over.mp3" )
+gameMusic = audio.loadStream( "audio/game/The-Crypt.wav")
+gameOverMusic = audio.loadStream( "audio/game_over/game_over.mp3" )
 
 --SOUND
--- bubblepop = audio.loadSound ("sound/pop.mp3")
-gameOverSound = audio.loadSound( "sound/evil.mp3" )
--- losesound = audio.loadSound ("sound/lose.wav")
--- menupicksound = audio.loadSound ("sound/menu_pick.wav")
--- jumpsound = audio.loadSound ("sound/jump.wav")
--- shootsound = audio.loadSound ("sound/huh.wav")
--- lvlupsound = audio.loadSound ("sound/chipquest.wav")
+gameOverSound = audio.loadSound( "audio/game_over/evil.mp3" )
  
 audio.reserveChannels (2) 
 
