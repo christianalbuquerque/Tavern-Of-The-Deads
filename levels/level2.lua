@@ -38,7 +38,7 @@ function scene:create( event )
 	lvl:startTime()
 
 ----------------------------- Carregar Sprites
-	mainGroup:insert(lvl:createBartender())
+	-- mainGroup:insert(lvl:createBartender())
 	backGroup:insert(lvl:createBackground())
 
 	local header = lvl:buildHeader()

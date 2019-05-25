@@ -11,6 +11,10 @@ local aimStopped = false
 local aim
 local gameLoop
 
+local boss
+local bossMovementLoop
+local bossMovementBoolean = false -- TRUE DIREITA, FALSE ESQUERDA
+
 local enemyInteractionLoop
 
 local backGroup = display.newGroup()
@@ -35,11 +39,46 @@ end
 -- 	enemies[enemy].y = math.random(150, display.contentCenterY)
 -- end
 
+-- function createEnemy()
+--     boss = display.newImageRect(mainGroup, "images/boss-level/skull.png", 50, 120)
+-- 	boss.myName = "boss"
+--     boss.colliding = false
+--     physics.addBody(boss, "dynamic", { radius=40 } )
+	
+-- 	boss.x = display.contentCenterX
+-- 	boss.y = display.contentCenterY - 357
+-- end
+
+
+function bossMovement()
+
+	if(lvl:getEnemyQtd() == 0) then
+
+	-- TRUE DIREITA, FALSE ESQUERDA
+	if(bossMovementBoolean == true) then
+		boss.x = boss.x + 5
+
+		if(boss.x >= 600) then
+			bossMovementBoolean = false
+		end
+	end
+
+	if(bossMovementBoolean == false) then
+		boss.x = boss.x - 5
+
+		if(boss.x <= 150) then
+			bossMovementBoolean = true
+		end
+	end
+end
+
+end
+
 -- create()
 function scene:create( event )
 
 	local sceneGroup = self.view
-	lvl:setCurrentLevel(1)
+	lvl:setCurrentLevel(5)
 
 	sceneGroup:insert(backGroup)
 	sceneGroup:insert(mainGroup)
@@ -51,21 +90,20 @@ function scene:create( event )
 	
 	-- mainGroup:insert(lvl:createBartender())
 	backGroup:insert(lvl:createBackground())
-
-	-- BALCONY
-	-- local balcony = display.newImageRect( mainGroup, "./images/bar-level/balcao.png", 800, 150 )
-	-- balcony.x = display.contentCenterX
-	-- balcony.y = display.contentCenterY + 400
-	-- backGroup:insert(balcony)
 			
 	local header = lvl:buildHeader()
 	uiGroup:insert(header)
 	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
-	-- enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
 
+	boss = display.newImageRect(mainGroup, "images/boss-level/boss.png", 120, 180)
+	boss.x = display.contentCenterX
+	boss.y = display.contentCenterY - 382
+	-- enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
+	
+	-- createEnemy()
+	bossMovementLoop = timer.performWithDelay(10, bossMovement, -1)
 	local enemies = lvl:createAllEnemies()
 	mainGroup:insert(lvl:getEnemiesGroup())
-	
 	lvl:startAimCollision()
 	lvl:startEnemyQtd()
 end

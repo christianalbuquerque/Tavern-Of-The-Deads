@@ -8,7 +8,7 @@ base.settings = {}
 --------------------------------------
 --------------------------------------
 
-    base.settings.maxLevels = 4
+    base.settings.maxLevels = 5
     base.settings.currentLevel = 1
     base.settings.levels = {}
 
@@ -21,12 +21,16 @@ base.settings = {}
         base.settings.levels[2].background = "images/selector-imgs/lvl2-img.png"
         
         base.settings.levels[3] = {}
-        base.settings.levels[3].title = "NOITE"
-        base.settings.levels[3].background = "images/selector-imgs/lvl3-img.png"
+        base.settings.levels[3].title = "PRAIA"
+        base.settings.levels[3].background = "images/selector-imgs/lvl4-img.png"
 
         base.settings.levels[4] = {}
-        base.settings.levels[4].title = "PRAIA"
-        base.settings.levels[4].background = "images/selector-imgs/lvl4-img.png"
+        base.settings.levels[4].title = "NOITE"
+        base.settings.levels[4].background = "images/selector-imgs/lvl3-img.png"
+
+        base.settings.levels[5] = {}
+        base.settings.levels[5].title = "FINAL"
+        base.settings.levels[5].background = "images/selector-imgs/boss-img.png"
 
     --------------------------------------
     --- LEVEL 1 ---
@@ -54,7 +58,7 @@ base.settings = {}
     base.levels[2] = {}
         base.levels[2].background = "images/day-level/day-level.png"
         base.levels[2].numEnemies = 7
-        base.levels[2].time = 1000
+        base.levels[2].time = 10
         base.levels[2].lvlName = "level2"
         base.levels[2].enemies = {}
 
@@ -100,6 +104,24 @@ base.settings = {}
         base.levels[4].enemies[1].y = 120
         base.levels[4].enemies[1].width = 50
         base.levels[4].enemies[1].height = 120
+
+    --------------------------------------
+    --- LEVEL FINAL ---
+    --------------------------------------
+
+    base.levels[5] = {}
+    base.levels[5].background = "images/boss-level/boss-bar.png"
+    base.levels[5].numEnemies = 1
+    base.levels[5].time = 100
+    base.levels[5].lvlName = "level5"
+    base.levels[5].enemies = {}
+    
+        base.levels[5].enemies[1] = {}
+        base.levels[5].enemies[1].path = "images/boss-level/skull.png"
+        base.levels[5].enemies[1].x = 50
+        base.levels[5].enemies[1].y = 120
+        base.levels[5].enemies[1].width = 50    
+        base.levels[5].enemies[1].height = 120
 
 return base
 
