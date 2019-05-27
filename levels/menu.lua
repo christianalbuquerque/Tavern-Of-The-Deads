@@ -76,7 +76,7 @@ function scene:create( event )
 	playButton.y = display.contentCenterY + 100
 
 	-- Option Button
-	local optButton = display.newImageRect( sceneGroup, "images/menu/optionbtn.png", 350, 100 )
+	local optButton = display.newImageRect( sceneGroup, "images/menu/btn-fases.png", 350, 100 )
 	optButton.x = display.contentCenterX
 	optButton.y = display.contentCenterY + 250
 
