@@ -2,7 +2,7 @@
 local composer = require( "composer" )
 local lvl = require( "level_template" )
 
-composer.recycleOnSceneChange = false
+composer.recycleOnSceneChange = true
 local scene = composer.newScene()
 
 local gameLoop

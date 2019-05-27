@@ -2,6 +2,7 @@ local composer = require( "composer" )
 local widget = require( "widget" )
 local scene = composer.newScene()
 
+composer.recycleOnSceneChange = true
 local base = require( "base" )
 
 local titleText
