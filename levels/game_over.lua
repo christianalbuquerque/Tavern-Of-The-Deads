@@ -33,20 +33,20 @@ function scene:create( event )
 	sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
     
     -- Loading my menu background image
-	local background = display.newImageRect( sceneGroup, "./images/game_over/gameover.png", 800, 1000 )
+	local background = display.newImageRect( sceneGroup, "images/game_over/gameover.png", 800, 1000 )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 	
-	local rightShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local rightShortChain = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	rightShortChain.x = display.contentCenterX + 100
 	rightShortChain.y = 80
 
 	-- Loading my first short chain (left) in the top
-	local leftShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local leftShortChain = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	leftShortChain.x = display.contentCenterX - 100
 	leftShortChain.y = 80
 
-    local backBtn = display.newImageRect( sceneGroup, "./images/game_over/back.png", 300, 100 )
+    local backBtn = display.newImageRect( sceneGroup, "images/game_over/back.png", 300, 100 )
     backBtn.x = display.contentCenterX
 	backBtn.y = 200
 
@@ -67,8 +67,8 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-		playGameMusic(gameOverMusic)
-		playSFX(gameOverSound)
+		-- playGameMusic(gameOverMusic)
+		-- playSFX(gameOverSound)
 
 	end
 end
@@ -82,11 +82,12 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
+		lvl:restoreScore()
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-		audio.stop( 1 )
-		audio.stop( 2 )
+		-- audio.stop( 1 )
+		-- audio.stop( 2 )
 	end
 end
 
@@ -96,8 +97,8 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-	audio.dispose( gameOverMusic )
-	audio.dispose( gameOverSound )
+	-- audio.dispose( gameOverMusic )
+	-- audio.dispose( gameOverSound )
 end
 
 

@@ -31,6 +31,15 @@ local function gameTime()
 	end
 end 
 
+local function enemyInteraction()
+	local enemy
+	print(lvl:getEnemyQtd())
+	enemy = math.random(1, lvl:getEnemyQtd())
+	enemies = lvl:getEnemiesGroup()
+	enemies[enemy].x = math.random(120, display.contentCenterX)
+	enemies[enemy].y = math.random(150, display.contentCenterY)
+end
+
 -- local function enemyInteraction()
 -- 	local enemy
 -- 	enemy = math.random(1, lvl:getEnemyQtd())
@@ -50,29 +59,29 @@ end
 -- end
 
 
-function bossMovement()
+-- function bossMovement()
 
-	if(lvl:getEnemyQtd() == 0) then
+-- 	if(lvl:getEnemyQtd() == 0) then
 
-	-- TRUE DIREITA, FALSE ESQUERDA
-	if(bossMovementBoolean == true) then
-		boss.x = boss.x + 5
+-- 	-- TRUE DIREITA, FALSE ESQUERDA
+-- 	if(bossMovementBoolean == true) then
+-- 		boss.x = boss.x + 5
 
-		if(boss.x >= 600) then
-			bossMovementBoolean = false
-		end
-	end
+-- 		if(boss.x >= 600) then
+-- 			bossMovementBoolean = false
+-- 		end
+-- 	end
 
-	if(bossMovementBoolean == false) then
-		boss.x = boss.x - 5
+-- 	if(bossMovementBoolean == false) then
+-- 		boss.x = boss.x - 5
 
-		if(boss.x <= 150) then
-			bossMovementBoolean = true
-		end
-	end
-end
+-- 		if(boss.x <= 150) then
+-- 			bossMovementBoolean = true
+-- 		end
+-- 	end
+-- end
 
-end
+-- end
 
 -- create()
 function scene:create( event )
@@ -146,7 +155,7 @@ end
 function scene:destroy( event )
 	print('DESTROOY')
 	local sceneGroup = self.view
-	audio.dispose( gameMusic )
+	-- audio.dispose( gameMusic )
 end
 
 scene:addEventListener( "create", scene )

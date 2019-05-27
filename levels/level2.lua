@@ -7,6 +7,9 @@ local scene = composer.newScene()
 local sounds = require( "sound_file" )
 local base = require( "base" )
 
+local enemyInteractionLoop
+local enemyBooleanMovement = false
+
 local gameLoop
 
 local backGroup = display.newGroup()
@@ -24,6 +27,29 @@ local function gameTime()
 		lvl:endGame()
 	end
 end 
+
+local function enemyInteraction()
+	local enemy
+	enemy = math.random(1, lvl:getEnemyQtd())
+	enemies = lvl:getEnemiesGroup()
+	
+		-- TRUE DIREITA, FALSE ESQUERDA
+	if(enemyBooleanMovement == true) then
+		enemies[enemy].x = enemies[enemy].x + 50
+
+		if(enemies[enemy].x >= 600) then
+			enemyBooleanMovement = false
+		end
+	end
+
+	if(enemyBooleanMovement == false) then
+		enemies[enemy].x = enemies[enemy].x - 50
+
+		if(enemies[enemy].x <= 150) then
+			enemyBooleanMovement = true
+		end
+	end
+end
 
 -- create()
 function scene:create( event )
@@ -45,6 +71,7 @@ function scene:create( event )
 	uiGroup:insert(header)
 	timer.performWithDelay( 1000, gameTime, 0 )
 
+	enemyInteractionLoop = timer.performWithDelay(1100, enemyInteraction, 0)
 	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
 
 	local enemies = lvl:createAllEnemies()
@@ -82,7 +109,8 @@ function scene:hide( event )
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
-		-- timer.cancel(enemyInteractionLoop)
+		composer.removeScene("level1")
+		timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()
 	elseif ( phase == "did" ) then

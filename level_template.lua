@@ -19,6 +19,8 @@ local score = 0
 local enemyText
 local qtdEnemy = 0
 
+local controlAim
+
 local enemyChosen
 
 local bartender
@@ -217,7 +219,8 @@ function aimMovement()
 end
 
 function touchAim(event)
-	if event.phase == "began" then
+    if event.phase == "began" then
+        controlAim = true
 		aim = display.newImageRect('images/base/mira.png', 50, 50)
 		aim.x = event.x
 		aim.y = 800		
@@ -226,7 +229,8 @@ function touchAim(event)
 		physics.addBody(aim, "dynamic", { radius=20, isSensor=true })
 		aimTimerLoop = timer.performWithDelay(10, aimMovement, -1)
 
-	elseif event.phase == "ended" then			
+    elseif event.phase == "ended" then	
+        controlAim = false		
 		timer.performWithDelay(10, timer.cancel(aimTimerLoop), 1)
 		verifyEnemies()
 		aim:removeSelf()
@@ -253,11 +257,22 @@ function lvl:endGame()
 	composer.gotoScene( "levels.game_over", { time=800, effect="crossFade" } )
 end
 
+function lvl:restoreScore()
+    score = 0
+end
+
 function lvl:destroy()
     enemies = {}
     lvl:endAimCollision()
+    background:removeEventListener("touch", touchAim)
     qtdEnemy = 0
     time = 0    
+    
+    if(controlAim == true) then
+        timer.performWithDelay(10, timer.cancel(aimTimerLoop), 1)
+        verifyEnemies()
+		aim:removeSelf()
+    end
 end
 
 return lvl

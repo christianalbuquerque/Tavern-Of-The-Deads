@@ -23,6 +23,15 @@ local function gameTime()
 	end
 end 
 
+local function enemyInteraction()
+	local enemy
+	print(lvl:getEnemyQtd())
+	enemy = math.random(1, lvl:getEnemyQtd())
+	enemies = lvl:getEnemiesGroup()
+	enemies[enemy].x = math.random(120, display.contentCenterX)
+	enemies[enemy].y = math.random(150, display.contentCenterY)
+end
+
 -- create()
 function scene:create( event )
 

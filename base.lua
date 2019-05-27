@@ -57,7 +57,7 @@ base.settings = {}
         
     base.levels[2] = {}
         base.levels[2].background = "images/day-level/day-level.png"
-        base.levels[2].numEnemies = 7
+        base.levels[2].numEnemies = 6
         base.levels[2].time = 100
         base.levels[2].lvlName = "level2"
         base.levels[2].enemies = {}
@@ -75,8 +75,8 @@ base.settings = {}
 
     base.levels[3] = {}
         base.levels[3].background = "images/night-level/night-level.png"
-        base.levels[3].numEnemies = 10
-        base.levels[3].time = 10
+        base.levels[3].numEnemies = 6
+        base.levels[3].time = 20
         base.levels[3].lvlName = "level3"
         base.levels[3].enemies = {}
 
@@ -93,8 +93,8 @@ base.settings = {}
 
     base.levels[4] = {}
     base.levels[4].background = "images/forest-level/beach.png"
-    base.levels[4].numEnemies = 10
-    base.levels[4].time = 10
+    base.levels[4].numEnemies = 7
+    base.levels[4].time = 20
     base.levels[4].lvlName = "level4"
     base.levels[4].enemies = {}
 

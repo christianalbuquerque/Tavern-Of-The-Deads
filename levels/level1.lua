@@ -20,6 +20,9 @@ local uiGroup = display.newGroup()
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
+
+lvl:setCurrentLevel(1)
+
 local function gameTime()
 	lvl:reduceTime(1)
 	if(lvl:getTime() == 0) then
@@ -29,6 +32,7 @@ end
 
 local function enemyInteraction()
 	local enemy
+	print(lvl:getEnemyQtd())
 	enemy = math.random(1, lvl:getEnemyQtd())
 	enemies = lvl:getEnemiesGroup()
 	enemies[enemy].x = math.random(120, display.contentCenterX)
@@ -39,7 +43,6 @@ end
 function scene:create( event )
 
 	local sceneGroup = self.view
-	lvl:setCurrentLevel(1)
 
 	sceneGroup:insert(backGroup)
 	sceneGroup:insert(mainGroup)
@@ -61,7 +64,7 @@ function scene:create( event )
 	local header = lvl:buildHeader()
 	uiGroup:insert(header)
 	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
-	enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
+	enemyInteractionLoop = timer.performWithDelay( 2000, enemyInteraction, 0)
 
 	local enemies = lvl:createAllEnemies()
 	mainGroup:insert(lvl:getEnemiesGroup())
@@ -80,7 +83,7 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- physics.start()
-		playGameMusic(gameMusic)
+		-- playGameMusic(gameMusic)
 	end
 end
 
@@ -100,7 +103,7 @@ function scene:hide( event )
 		lvl:destroy()
 	elseif ( phase == "did" ) then
 		-- physics.pause()
-		audio.stop( 1 )
+		-- audio.stop( 1 )
 	end
 end
 
@@ -108,7 +111,7 @@ end
 function scene:destroy( event )
 	print('DESTROOY')
 	local sceneGroup = self.view
-	audio.dispose( gameMusic )
+	-- audio.dispose( gameMusic )
 end
 
 scene:addEventListener( "create", scene )

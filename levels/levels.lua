@@ -28,7 +28,7 @@ local function handleLevelSelect( event )
 		elseif ( event.target.id == '4') then
             composer.gotoScene( "levels.level4", { effect="crossFade", time=333 } )            
 		else
-			composer.gotoScene( "levels.final", { effect="crossFade", time=333 } )
+			composer.gotoScene( "levels.level5", { effect="crossFade", time=333 } )
 		end		
 	end
 end
