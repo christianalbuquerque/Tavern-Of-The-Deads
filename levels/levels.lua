@@ -40,12 +40,12 @@ function scene:create( event )
 	sceneGroup:insert(mainGroup)
 	sceneGroup:insert(uiGroup)
 
-	local background = display.newImageRect( backGroup, "images/selector-imgs/box.png", display.contentWidth - 150, display.contentHeight )
+	local background = display.newImageRect( backGroup, "images/forest-level/forest.png", display.contentWidth - 150, display.contentHeight )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 	backGroup:insert( background )
 
-	titleText = display.newText( uiGroup, "SELECIONE A FASE: ", 200, 80, native.systemFont, 36 )
+	titleText = display.newText( uiGroup, "SELECIONE A FASE: ", 200, 80, native.systemFontBold, 36 )
 	titleText.x = display.contentCenterX
 	titleText.y = 50
 
@@ -88,8 +88,7 @@ function scene:create( event )
 		uiGroup:insert( buttons[i] )
 		scrollView:insert( uiGroup )
 
-        titleText = display.newText(uiGroup ,base.settings.levels[i].title, 0, 0, native.systemFont, 30)
-		titleText:setFillColor(0.2)
+        titleText = display.newText(uiGroup ,base.settings.levels[i].title, 0, 0, native.systemFontBold, 30)
 		titleText.x = xOffset
 		titleText.y = yOffset + 130
 		-- scrollView:insert(titleText)
