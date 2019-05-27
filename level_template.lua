@@ -4,7 +4,7 @@ local base = require( "base")
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 0)
-physics.setDrawMode("hybrid")
+-- physics.setDrawMode("hybrid")
 
 local lvl = {}
 
@@ -142,6 +142,8 @@ function selectEnemy()
 end
 
 function lvl:createEnemy()
+    physics.start()
+    physics.setGravity(0, 0)
     local newEnemy = display.newImageRect(enemiesGroup, base.levels[currentLevel].enemies[1].path, base.levels[currentLevel].enemies[1].width, base.levels[currentLevel].enemies[1].height)
 	newEnemy.myName = "enemy"
     newEnemy.colliding = false
@@ -274,7 +276,8 @@ function lvl:destroy()
     lvl:endAimCollision()
     background:removeEventListener("touch", touchAim)
     qtdEnemy = 0
-    time = 0    
+    time = 0
+    physics.stop()
     
     if(controlAim == true) then
         timer.performWithDelay(10, timer.cancel(aimTimerLoop), 1)

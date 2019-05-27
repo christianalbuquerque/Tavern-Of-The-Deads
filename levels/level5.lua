@@ -62,7 +62,7 @@ function scene:create( event )
 	boss = display.newImageRect(mainGroup, "images/boss-level/boss.png", 120, 180)
 	boss.x = display.contentCenterX
 	boss.y = display.contentCenterY - 382
-	enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
+	enemyInteractionLoop = timer.performWithDelay( 2000, enemyInteraction, 0)
 	
 	-- createEnemy()
 	bossMovementLoop = timer.performWithDelay(10, bossMovement, -1)
