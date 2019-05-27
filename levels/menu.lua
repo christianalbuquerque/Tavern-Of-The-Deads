@@ -30,53 +30,53 @@ function scene:create( event )
 	-- Code here runs when the scene is first created but has not yet appeared on screen
 
 	-- Loading my menu background image
-	local background = display.newImageRect( sceneGroup, './images/menu/darkback.png', 800, 1000 )
+	local background = display.newImageRect( sceneGroup, 'images/menu/darkback.png', 800, 1000 )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
 
 	-- Loading my first short chain (right) in the top
-	local rightShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local rightShortChain = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	rightShortChain.x = display.contentCenterX + 100
 	rightShortChain.y = 80
 
 	-- Loading my first short chain (left) in the top
-	local leftShortChain = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local leftShortChain = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	leftShortChain.x = display.contentCenterX - 100
 	leftShortChain.y = 80
 
 	-- Loading my second short chain (right) in the midle
-	local rightShortChain2 = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local rightShortChain2 = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	rightShortChain2.x = display.contentCenterX + 100
 	rightShortChain2.y = 700
 
 	-- Loading my second short chain (left) in the midle
-	local leftShortChain2 = display.newImageRect( sceneGroup, "./images/menu/corrente.png", 40, 140 )
+	local leftShortChain2 = display.newImageRect( sceneGroup, "images/menu/corrente.png", 40, 140 )
 	leftShortChain2.x = display.contentCenterX - 100
 	leftShortChain2.y = 700
 
 	-- Loading my first long chain (right) in the midle
-	local rightLongChain = display.newImageRect( sceneGroup, "./images/menu/corrente-longa.png", 40, 280 )
+	local rightLongChain = display.newImageRect( sceneGroup, "images/menu/corrente-longa.png", 40, 280 )
 	rightLongChain.x = display.contentCenterX + 100
 	rightLongChain.y = display.contentCenterY
 
 	-- Loading my first long chain (right) in the midle
-	local leftLongChain = display.newImageRect( sceneGroup, "./images/menu/corrente-longa.png", 40, 280 )
+	local leftLongChain = display.newImageRect( sceneGroup, "images/menu/corrente-longa.png", 40, 280 )
 	leftLongChain.x = display.contentCenterX - 100
 	leftLongChain.y = display.contentCenterY
 
 	-- Loading my game logo
-	local logo = display.newImageRect( sceneGroup, "./images/menu/logo.png", 500, 500 )
+	local logo = display.newImageRect( sceneGroup, "images/menu/logo.png", 500, 500 )
 	logo.x = display.contentCenterX - 18
 	logo.y = 400
 
 	-- Play Button
-	local playButton = display.newImageRect( sceneGroup, "./images/menu/playbtn.png", 350, 100 )
+	local playButton = display.newImageRect( sceneGroup, "images/menu/playbtn.png", 350, 100 )
 	playButton.x = display.contentCenterX 
 	playButton.y = display.contentCenterY + 100
 
 	-- Option Button
-	local optButton = display.newImageRect( sceneGroup, "./images/menu/optionbtn.png", 350, 100 )
+	local optButton = display.newImageRect( sceneGroup, "images/menu/optionbtn.png", 350, 100 )
 	optButton.x = display.contentCenterX
 	optButton.y = display.contentCenterY + 250
 
