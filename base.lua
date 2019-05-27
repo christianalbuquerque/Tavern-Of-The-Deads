@@ -44,7 +44,7 @@ base.settings = {}
         base.levels[1].enemies = {}
 
             base.levels[1].enemies[1] = {}
-            base.levels[1].enemies[1].path = "images/bar-level/ghost.png"
+            base.levels[1].enemies[1].path = "images/bar-level/zombie.png"
             base.levels[1].enemies[1].type = "ghost"
             base.levels[1].enemies[1].x = 50
             base.levels[1].enemies[1].y = 120
@@ -58,15 +58,15 @@ base.settings = {}
     base.levels[2] = {}
         base.levels[2].background = "images/day-level/day-level.png"
         base.levels[2].numEnemies = 6
-        base.levels[2].time = 100
+        base.levels[2].time = 10
         base.levels[2].lvlName = "level2"
         base.levels[2].enemies = {}
 
             base.levels[2].enemies[1] = {}
-            base.levels[2].enemies[1].path = "images/day-level/zombie.png"
+            base.levels[2].enemies[1].path = "images/day-level/bat.png"
             base.levels[2].enemies[1].x = 50
             base.levels[2].enemies[1].y = 120
-            base.levels[2].enemies[1].width = 50
+            base.levels[2].enemies[1].width = 80
             base.levels[2].enemies[1].height = 120
 
     --------------------------------------
@@ -76,16 +76,16 @@ base.settings = {}
     base.levels[3] = {}
         base.levels[3].background = "images/night-level/night-level.png"
         base.levels[3].numEnemies = 6
-        base.levels[3].time = 20
+        base.levels[3].time = 10
         base.levels[3].lvlName = "level3"
         base.levels[3].enemies = {}
 
             base.levels[3].enemies[1] = {}
-            base.levels[3].enemies[1].path = "images/night-level/bat.png"
+            base.levels[3].enemies[1].path = "images/night-level/ghost.png"
             base.levels[3].enemies[1].x = 50
             base.levels[3].enemies[1].y = 120
-            base.levels[3].enemies[1].width = 80
-            base.levels[3].enemies[1].height = 150
+            base.levels[3].enemies[1].width = 50
+            base.levels[3].enemies[1].height = 120
 
     --------------------------------------
     --- LEVEL 4 ---
@@ -94,7 +94,7 @@ base.settings = {}
     base.levels[4] = {}
     base.levels[4].background = "images/forest-level/beach.png"
     base.levels[4].numEnemies = 7
-    base.levels[4].time = 20
+    base.levels[4].time = 10
     base.levels[4].lvlName = "level4"
     base.levels[4].enemies = {}
 
@@ -103,7 +103,7 @@ base.settings = {}
         base.levels[4].enemies[1].x = 50
         base.levels[4].enemies[1].y = 120
         base.levels[4].enemies[1].width = 50
-        base.levels[4].enemies[1].height = 120
+        base.levels[4].enemies[1].height = 100
 
     --------------------------------------
     --- LEVEL FINAL ---
@@ -111,8 +111,8 @@ base.settings = {}
 
     base.levels[5] = {}
     base.levels[5].background = "images/boss-level/boss-bar.png"
-    base.levels[5].numEnemies = 1
-    base.levels[5].time = 10
+    base.levels[5].numEnemies = 5
+    base.levels[5].time = 1000
     base.levels[5].lvlName = "level5"
     base.levels[5].enemies = {}
     

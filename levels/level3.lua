@@ -5,6 +5,7 @@ local lvl = require( "level_template" )
 composer.recycleOnSceneChange = true
 local scene = composer.newScene()
 
+local enemyInteractionLoop
 local gameLoop
 
 local backGroup = display.newGroup()
@@ -55,6 +56,7 @@ function scene:create( event )
 	local enemies = lvl:createAllEnemies()
 	mainGroup:insert(lvl:getEnemiesGroup())
 	
+	enemyInteractionLoop = timer.performWithDelay( 2000, enemyInteraction, 0)
 	gameLoop = timer.performWithDelay( 1000, gameTime, 0 )
 
 	lvl:startAimCollision()
@@ -92,7 +94,7 @@ function scene:hide( event )
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
-		-- timer.cancel(enemyInteractionLoop)
+		timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()
 

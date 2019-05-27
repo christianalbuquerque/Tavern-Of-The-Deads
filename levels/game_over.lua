@@ -69,6 +69,7 @@ function scene:show( event )
 		-- Code here runs when the scene is entirely on screen
 		-- playGameMusic(gameOverMusic)
 		-- playSFX(gameOverSound)
+		composer.removeScene("level1")
 
 	end
 end

@@ -4,7 +4,7 @@ local base = require( "base")
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 0)
--- physics.setDrawMode("hybrid")
+physics.setDrawMode("hybrid")
 
 local lvl = {}
 
@@ -215,7 +215,7 @@ function aimCollision(event)
 end
 
 function aimMovement()
-	aim.y = aim.y - 5
+	aim.y = aim.y - 10
 end
 
 function touchAim(event)

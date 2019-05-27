@@ -32,7 +32,7 @@ local function enemyInteraction()
 	local enemy
 	enemy = math.random(1, lvl:getEnemyQtd())
 	enemies = lvl:getEnemiesGroup()
-	
+
 		-- TRUE DIREITA, FALSE ESQUERDA
 	if(enemyBooleanMovement == true) then
 		enemies[enemy].x = enemies[enemy].x + 50
@@ -94,6 +94,7 @@ function scene:show( event )
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
 		playGameMusic(gameMusic)
+		composer.removeScene("level1")
 	end
 end
 
@@ -109,7 +110,6 @@ function scene:hide( event )
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
-		composer.removeScene("level1")
 		timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()

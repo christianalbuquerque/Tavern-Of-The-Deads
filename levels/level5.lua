@@ -12,8 +12,6 @@ local aim
 local gameLoop
 
 local boss
-local bossMovementLoop
-local bossMovementBoolean = false -- TRUE DIREITA, FALSE ESQUERDA
 
 local enemyInteractionLoop
 
@@ -40,41 +38,6 @@ local function enemyInteraction()
 	enemies[enemy].y = math.random(150, display.contentCenterY)
 end
 
--- function createEnemy()
---     boss = display.newImageRect(mainGroup, "images/boss-level/skull.png", 50, 120)
--- 	boss.myName = "boss"
---     boss.colliding = false
---     physics.addBody(boss, "dynamic", { radius=40 } )
-	
--- 	boss.x = display.contentCenterX
--- 	boss.y = display.contentCenterY - 357
--- end
-
-
--- function bossMovement()
-
--- 	if(lvl:getEnemyQtd() == 0) then
-
--- 	-- TRUE DIREITA, FALSE ESQUERDA
--- 	if(bossMovementBoolean == true) then
--- 		boss.x = boss.x + 5
-
--- 		if(boss.x >= 600) then
--- 			bossMovementBoolean = false
--- 		end
--- 	end
-
--- 	if(bossMovementBoolean == false) then
--- 		boss.x = boss.x - 5
-
--- 		if(boss.x <= 150) then
--- 			bossMovementBoolean = true
--- 		end
--- 	end
--- end
-
--- end
-
 -- create()
 function scene:create( event )
 
@@ -99,7 +62,7 @@ function scene:create( event )
 	boss = display.newImageRect(mainGroup, "images/boss-level/boss.png", 120, 180)
 	boss.x = display.contentCenterX
 	boss.y = display.contentCenterY - 382
-	-- enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
+	enemyInteractionLoop = timer.performWithDelay( 1000, enemyInteraction, 0)
 	
 	-- createEnemy()
 	bossMovementLoop = timer.performWithDelay(10, bossMovement, -1)
@@ -134,7 +97,7 @@ function scene:hide( event )
 		backGroup:removeSelf()
 		mainGroup:removeSelf()
 		uiGroup:removeSelf()
-		-- timer.cancel(enemyInteractionLoop)
+		timer.cancel(enemyInteractionLoop)
 		timer.cancel(gameLoop)
 		lvl:destroy()
 	elseif ( phase == "did" ) then
