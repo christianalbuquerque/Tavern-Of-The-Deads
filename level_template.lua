@@ -250,7 +250,15 @@ end
 ------------ CONTROLLING LEVELS
 
 function lvl:nextLevel()
-	composer.gotoScene( "levels."..base.levels[currentLevel+1].lvlName, { time=800, effect="crossFade" } )
+    if(lvl:getCurrentLevel() == 5)then
+        goToEnd()
+     else
+        composer.gotoScene( "levels."..base.levels[currentLevel+1].lvlName, { time=800, effect="crossFade" } )
+     end
+end
+
+function goToEnd()
+    composer.gotoScene( "levels.finish", { time=800, effect="crossFade" } )
 end
 
 function lvl:endGame()

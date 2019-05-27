@@ -40,14 +40,6 @@ local function enemyInteraction()
 	enemies[enemy].y = math.random(150, display.contentCenterY)
 end
 
--- local function enemyInteraction()
--- 	local enemy
--- 	enemy = math.random(1, lvl:getEnemyQtd())
--- 	enemies = lvl:getEnemiesGroup()
--- 	enemies[enemy].x = math.random(120, display.contentCenterX)
--- 	enemies[enemy].y = math.random(150, display.contentCenterY)
--- end
-
 -- function createEnemy()
 --     boss = display.newImageRect(mainGroup, "images/boss-level/skull.png", 50, 120)
 -- 	boss.myName = "boss"
