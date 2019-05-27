@@ -74,7 +74,7 @@ function lvl:reduceEnemyQtd()
     lvl:updateEnemyScore()
 
     if qtdEnemy == 0 then
-        -- lvl:nextLevel()
+        lvl:nextLevel()
     end
 end
 
