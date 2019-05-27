@@ -44,6 +44,10 @@ function scene:create( event )
 	background.y = display.contentCenterY
 	backGroup:insert( background )
 
+	titleText = display.newText( uiGroup, "SELECIONE A FASE: ", 200, 80, native.systemFont, 36 )
+	titleText.x = display.contentCenterX
+	titleText.y = 50
+
 	local levelSelectGroup = display.newGroup()
 
 	local xOffset = display.contentCenterX
