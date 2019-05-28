@@ -39,7 +39,7 @@ base.settings = {}
     base.levels[1] = {}
         base.levels[1].background = "images/bar-level/bar-piso.png"
         base.levels[1].numEnemies = 5
-        base.levels[1].time = 5
+        base.levels[1].time = 10
         base.levels[1].lvlName = "level1"
         base.levels[1].enemies = {}
 
@@ -112,7 +112,7 @@ base.settings = {}
     base.levels[5] = {}
     base.levels[5].background = "images/boss-level/boss-bar.png"
     base.levels[5].numEnemies = 5
-    base.levels[5].time = 1000
+    base.levels[5].time = 10
     base.levels[5].lvlName = "level5"
     base.levels[5].enemies = {}
     

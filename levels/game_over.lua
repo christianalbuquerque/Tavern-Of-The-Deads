@@ -67,8 +67,8 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-		-- playGameMusic(gameOverMusic)
-		-- playSFX(gameOverSound)
+		playGameMusic(gameOverMusic)
+		playSFX(gameOverSound)
 		composer.removeScene("level1")
 
 	end
@@ -87,8 +87,8 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-		-- audio.stop( 1 )
-		-- audio.stop( 2 )
+		audio.stop( 1 )
+		audio.stop( 2 )
 	end
 end
 
@@ -98,8 +98,8 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-	-- audio.dispose( gameOverMusic )
-	-- audio.dispose( gameOverSound )
+	audio.dispose( gameOverMusic )
+	audio.dispose( gameOverSound )
 end
 
 

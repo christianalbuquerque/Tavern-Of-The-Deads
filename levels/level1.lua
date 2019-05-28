@@ -73,7 +73,7 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- physics.start()
-		-- playGameMusic(gameMusic)
+		playGameMusic(gameMusic)
 	end
 end
 
@@ -92,7 +92,7 @@ function scene:hide( event )
 		lvl:destroy()
 	elseif ( phase == "did" ) then
 		-- physics.pause()
-		-- audio.stop( 1 )
+		audio.stop( 1 )
 	end
 end
 
@@ -100,7 +100,7 @@ end
 function scene:destroy( event )
 	print('DESTROOY')
 	local sceneGroup = self.view
-	-- audio.dispose( gameMusic )
+	audio.dispose( gameMusic )
 end
 
 scene:addEventListener( "create", scene )
